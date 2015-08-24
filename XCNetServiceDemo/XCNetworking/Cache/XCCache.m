@@ -239,6 +239,20 @@
     [self.memCache removeAllObjects];
 }
 
+- (void)clearDiskCacheForType:(XCCacheDataType)cacheDataType
+               withCompletion:(XCNetworkNoParamsBlock)completion
+{
+    dispatch_async(self.ioQueue, ^{
+        [_fileManager removeItemAtPath:[self diskCachePathForCacheDataType:cacheDataType] error:nil];
+        
+        if (completion) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completion();
+            });
+        }
+    });
+}
+
 - (void)clearDiskCache:(XCNetworkNoParamsBlock)completion
 {
     [self clearDiskCache:completion cacheDataType:XCCacheDataTypeNormal];

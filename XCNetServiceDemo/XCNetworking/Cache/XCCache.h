@@ -42,6 +42,8 @@
              cacheDataType:(XCCacheDataType)cacheDataType;
 
 - (void)clearMemoryCache;
+- (void)clearDiskCacheForType:(XCCacheDataType)cacheDataType
+               withCompletion:(XCNetworkNoParamsBlock)completion;
 
 - (void)clearDiskCache:(XCNetworkNoParamsBlock)completion;
 - (void)clearDiskCache:(XCNetworkNoParamsBlock)completion
